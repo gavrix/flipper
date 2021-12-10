@@ -6,3 +6,7 @@ up:
       yarn: 1.21.1
       packages:
         - ./desktop
+commands:
+  build:
+    run: cd desktop && yarn build --mac && cp -rf ../dist/mac-arm64/Flipper.app /Applications
+    desc: "Build and install Flipper on M1"
