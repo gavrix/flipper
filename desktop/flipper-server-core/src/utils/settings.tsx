@@ -13,8 +13,16 @@ import xdg from 'xdg-basedir';
 import {Settings, Tristate} from 'flipper-common';
 import {readFile, writeFile, access} from 'fs-extra';
 
+async function canAccess(path: string): Promise<boolean> {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
+}
 export async function loadSettings(): Promise<Settings> {
-  if (!access(getSettingsFile())) {
+  if (!(await canAccess(getSettingsFile()))) {
     return getDefaultSettings();
   }
   const json = await readFile(getSettingsFile(), {encoding: 'utf8'});

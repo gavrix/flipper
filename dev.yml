@@ -1,0 +1,8 @@
+up:
+  - homebrew:
+      - watchman
+  - node:
+      version: v16.12.0
+      yarn: 1.21.1
+      packages:
+        - ./desktop

@@ -231,7 +231,10 @@ async function buildDist(buildFolder: string) {
     }
     postBuildCallbacks.push(() =>
       spawn('zip', ['-qyr9', '../Flipper-mac.zip', 'Flipper.app'], {
-        cwd: path.join(distDir, 'mac'),
+        cwd: path.join(
+          distDir,
+          `mac${process.arch === 'arm64' ? '-arm64' : ''}`,
+        ),
         encoding: 'utf-8',
       }),
     );
